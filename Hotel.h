@@ -2,6 +2,7 @@
 #define PROJECT1_HOTEL_H
 
 #include <iostream>
+#include <fstream>
 #include "Rooms.h"
 #include "Date.h"
 
@@ -19,8 +20,10 @@ public:
     void availableRoom(Date date);
     void freeingRoom(unsigned int number);
     void check(Date from, Date to);
-    void find();
+    void find(Date from, Date to);
     void close();
+    void read();
+    //void write();
 
 };
 

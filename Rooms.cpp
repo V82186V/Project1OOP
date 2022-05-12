@@ -55,37 +55,33 @@ unsigned int Room::getBeds() const {
     return this->beds;
 }
 
-bool Room::isFree(Date date) const
-{
+bool Room::isFree(Date date) const {
     for (int i = 0; i < size; ++i) {
-        if(dates[i].getStart()<date && date < dates[i].getEnd()) continue;
+        if (dates[i].getStart() < date && date < dates[i].getEnd()) continue;
         else return true;
     }
     return false;
 }
-void Room::free(){
+
+void Room::free() {
     this->size = 0;
     this->capacity = 1;
     delete[] dates;
 }
-void Room::getDate(Date from, Date to) const
-{
+
+void Room::getDate(Date from, Date to) const {
     for (int i = 0; i < size; ++i) {
-        if(from<dates[i].getStart() && to<dates[i].getEnd())
-        {
-            std::cout << this->number << " " << diff(from,to) << std::endl;
-        }
-        else if(dates[i].getStart() < from && dates[i].getEnd() < to)
-        {
-            std::cout << this->number << " " << diff(from,dates[i].getEnd()) << std::endl;
-        }
-        else if(dates[i].getStart() > from && dates[i].getEnd() < to)
-        {
-            std::cout << this->number << " " << diff(dates[i].getStart(),dates[i].getEnd()) << std::endl;
+        if (from < dates[i].getStart() && to < dates[i].getEnd()) {
+            std::cout << this->number << " " << diff(from, to) << std::endl;
+        } else if (dates[i].getStart() < from && dates[i].getEnd() < to) {
+            std::cout << this->number << " " << diff(from, dates[i].getEnd()) << std::endl;
+        } else if (dates[i].getStart() > from && dates[i].getEnd() < to) {
+            std::cout << this->number << " " << diff(dates[i].getStart(), dates[i].getEnd()) << std::endl;
         }
     }
 }
-void Room::add(Date from, Date to,int status, char* name, char* note) {
+
+void Room::add(Date from, Date to, int status, char *name, char *note) {
     if (!dates) {
         dates = new RoomDB[capacity];
     }
@@ -95,9 +91,20 @@ void Room::add(Date from, Date to,int status, char* name, char* note) {
     for (int i = 0; i < size; ++i) {
         if (dates[i].overlap(from, to)) throw std::invalid_argument("Room unavailable");
     }
-    RoomDB temp(from, to,status,name,note);
+    RoomDB temp(from, to, status, name, note);
     dates[size] = temp;
     size++;
+}
+
+int Room::find(Date from, Date to, int &index) const {
+    for (int i = 0; i < size; ++i) {
+        if (dates[i].getStart() > from && dates[i].getEnd() < to) {
+            index = number;
+            return this->beds;
+        }
+
+    }
+    return -1;
 }
 
 

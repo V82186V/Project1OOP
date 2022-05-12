@@ -72,6 +72,32 @@ void Hotel::check(Date from, Date to)
     }
 }
 
-void find();
+void Hotel::find(Date from, Date to)
+{
+    int minID=-1;
+    int minBeds = INT_MAX;
+    int x,result;
+    for (int i = 0; i < roomCapacity; ++i) {
+        x = hotel[i]->find(from,to,minID);
+        if(x < minBeds) result = minID;
+    }
+    std::cout << result << std::endl;
+}
 
 void close();
+
+void Hotel::read(){
+    std::ifstream reader("data.txt");
+    if(!reader.is_open()) throw std::invalid_argument("Cannot open file");
+    char buffer[1024];
+    reader >> buffer;
+    this->roomCapacity = std::stoi(buffer);
+    this->hotel = new Room*[roomCapacity];
+    int num,size,i=0;
+    while(reader >> num >> size)
+    {
+        this->hotel[i] = new Room(num,size);
+        i++;
+    }
+    reader.close();
+}

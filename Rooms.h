@@ -26,6 +26,7 @@ public:
     void free();
     void getDate(Date from, Date to) const;
     void add(Date from, Date to,int status, char* name, char* note = nullptr);
+    int find(Date from, Date to, int& index) const;
 };
 
 #endif //ROOMS_H
