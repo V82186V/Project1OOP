@@ -21,7 +21,7 @@ public:
     void freeingRoom(unsigned int number);
     void check(Date from, Date to);
     void find(Date from, Date to);
-    void close();
+    void close(Date from, Date to, int number);
     void read();
     //void write();
 

@@ -84,7 +84,17 @@ void Hotel::find(Date from, Date to)
     std::cout << result << std::endl;
 }
 
-void close();
+void Hotel::close(Date from, Date to, int number)
+{
+    for (int i = 0; i < roomCapacity; ++i) {
+        if(hotel[i]->getNumber() == number){
+            char buffer[1024];
+            std::cin >> buffer;
+            hotel[i]->add(from,to,2,"Service",buffer);
+            break;
+        }
+    }
+}
 
 void Hotel::read(){
     std::ifstream reader("data.txt");
