@@ -20,13 +20,6 @@ RoomDB::RoomDB(Date start, Date end, int status, char *name, char *note) {
     strcpy(this->name, name);
 }
 
-RoomDB::RoomDB(Date start, Date end) {
-    this->start = new Date(start);
-    this->end = new Date(end);
-    this->name = nullptr;
-    this->note = nullptr;
-}
-
 RoomDB::RoomDB(const RoomDB &other) {
     this->start = new Date(*other.start);
     this->end = new Date(*other.end);
@@ -71,10 +64,6 @@ RoomDB::~RoomDB() {
     delete end;
     delete[] name;
     delete[] note;
-}
-
-int RoomDB::getStatus() const {
-    return this->status;
 }
 
 bool RoomDB::overlap(Date from, Date to) {

@@ -51,10 +51,6 @@ unsigned int Room::getNumber() const {
     return this->number;
 }
 
-unsigned int Room::getBeds() const {
-    return this->beds;
-}
-
 bool Room::isFree(Date date) const {
     for (int i = 0; i < size; ++i) {
         if (dates[i].getStart() < date && date < dates[i].getEnd()) continue;
@@ -102,7 +98,6 @@ int Room::find(Date from, Date to, int &index) const {
             index = number;
             return this->beds;
         }
-
     }
     return -1;
 }
